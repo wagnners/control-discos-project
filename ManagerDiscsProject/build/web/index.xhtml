@@ -1,0 +1,138 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="content">
+
+        <div class="container form-group">
+
+            <div class="body">
+                <h4>Informações do disco</h4>
+            </div>   
+
+
+            <div class="card-body">
+                <h4 style="padding-top: 10px">Discos</h4>
+
+                <div class="form-group" >
+                    <h:form>
+                        <div class='row'>
+                            <div class="col-sm-3">                
+                                <h:inputText value="#{beanDisco.disco.anoLancamento}" id="in-ano" requiredMessage="Ano inválido"
+                                             class="form-control" maxlength="4"><f:validateLongRange minimum="0" maximum="2017"/> </h:inputText>    
+                                <h:message for="in-ano"/>
+
+                            </div>
+                            <h:commandButton class="btn btn-info" value="Pesquisar Por Ano" action="#{beanDisco.listarPorAno()}">
+
+                            </h:commandButton>
+                         <div class="col-sm-3">                
+                             <h:inputText value="#{beanDisco.disco.artista}" id="in-artista" requiredMessage="Ano inválido"
+                                             class="form-control"> </h:inputText>    
+                                <h:message for="in-artista"/>
+
+                            </div>
+                              <h:commandButton class="btn btn-info" value="Pesquisar Por Artista" action="#{beanDisco.listarPorArtista()}">
+
+                            </h:commandButton>
+                        
+                        
+                        </div>
+                    </h:form>
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <table  class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-5">Artista</th>
+                                <th class="col-lg-5"><h:form><h:commandLink actionListener="#{beanDisco.ordenarPorNome()}"> Nome </h:commandLink></h:form></th>
+                                <th class="col-lg-5">Ano de Lançamento</th>     
+                                <th class="col-lg-5">Quantidade de música</th> 
+                                <th class="col-lg-2">  
+                                    <h:form>
+                                        <h:commandLink action="#{beanDisco.irPaginaCadastro()}"> <i class="fa fa-plus"></i></h:commandLink>  
+                                    </h:form>
+
+                                   </th>
+                            </tr>                    
+                        </thead>
+                        <tbody>
+                            <ui:repeat var="disco" value="#{beanDisco.listaDiscos}">
+                                <tr>
+                                    <td class="col-md-5">#{disco.artista}</td>
+                                    <td class="col-md-5">#{disco.nome}</td>
+                                    <td class="col-md-5">#{disco.anoLancamento}</td>
+                                    <td class="col-md-5">#{beanDisco.getQuantidadeMusica(disco.disco_id)}</td>
+                                    <td class="col-md-2">
+                                        <div style="display: flex; justify-content: space-around;">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <h:form>
+                                                        <h:commandLink action="#{beanDisco.setaDiscoParaEditar(disco)}"><i class="fa fa-edit"></i></h:commandLink>  
+
+
+                                                    </h:form>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <h:form>
+                                                        <h:commandLink action="#{beanDisco.excluirDisco(disco)}"><i class="fa fa-trash"></i></h:commandLink>                         
+                                                    </h:form>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </ui:define>
+
+    <ui:define name="script">
+
+        
+        
+        <!--         <h:outputScript target="body">
+                
+                     alert("Working!!");
+                    itens = $(".sortable-item");
+                    for (var i = 0; i < itens.length; i++) {
+                        console.log(itens[i].attr('value'));
+                    }
+                   
+          var alguma coisa = itens[i].detach() (( 1. retonar elemtno, 2. remover do DOM))
+        
+        
+        salvar as variaves alguma coisa em vetor       
+        orderar o vertor       
+        $("div.row").append//apendChild(vetor[0] > n)
+                </h:outputScript>-->
+
+    </ui:define>
+
+
+</ui:decorate>
+
+
